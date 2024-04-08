@@ -64,7 +64,7 @@ function refreshTokenlogin(token) {
   );
 }
 
-let apiserver = "http://localhost:3000";
+let apiserver = "https://e-commerce-i0t6.onrender.com";
 var refreshToken = getLocalStorageItem(`refreshToken`);
 var accessToken = getLocalStorageItem(`accessToken`);
 
