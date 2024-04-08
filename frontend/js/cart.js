@@ -64,27 +64,21 @@ function refreshTokenlogin(token) {
   data = {
     refreshToken: token,
   };
-  apicall(
-    "POST",
-    "http://localhost:3000/api/users/refresh",
-    JSON.stringify(data)
-  ).then((res) => {
-    setLocalStorageItem("accessToken", res.accessToken);
-    location.reload();
-  });
+  apicall("POST", `${apiserver}/api/users/refresh`, JSON.stringify(data)).then(
+    (res) => {
+      setLocalStorageItem("accessToken", res.accessToken);
+      location.reload();
+    }
+  );
 }
 
+let apiserver = "http://localhost:3000";
 var refreshToken = getLocalStorageItem(`refreshToken`);
 var accessToken = getLocalStorageItem(`accessToken`);
 var email;
 let cartItems = document.getElementById("cards-container");
 
-authenticate(
-  "POST",
-  accessToken,
-  "http://localhost:3000/api/products/products",
-  {}
-)
+authenticate("POST", accessToken, `${apiserver}/api/products/products`, {})
   .then(function (res) {
     document.getElementById("unauthorized").classList.remove("display-flex");
     document.getElementById("cartpage").classList.add("display");
@@ -101,11 +95,7 @@ authenticate(
   });
 
 function getCartItems(email) {
-  authenticate(
-    "GET",
-    accessToken,
-    `http://localhost:3000/api/cart/viewcart/${email}`
-  )
+  authenticate("GET", accessToken, `${apiserver}/api/cart/viewcart/${email}`)
     .then(function (res) {
       if (res.length == 0) {
         document.getElementById("empty-cart").classList.add("display-flex");
@@ -157,7 +147,7 @@ function deleteItem(id, email) {
   authenticate(
     "DELETE",
     accessToken,
-    `http://localhost:3000/api/cart/deletefromcart/${id}`,
+    `${apiserver}/api/cart/deletefromcart/${id}`,
     data
   )
     .then((res) => {
@@ -189,11 +179,7 @@ function filterdata(category) {
     e.style.backgroundColor = "#5c8374";
   });
   document.getElementById(category).style.backgroundColor = "#1b4242";
-  authenticate(
-    "GET",
-    accessToken,
-    `http://localhost:3000/api/cart/category/${category}`
-  )
+  authenticate("GET", accessToken, `${apiserver}/api/cart/category/${category}`)
     .then((res) => {
       products = res.products;
       cardsContainer.innerHTML = ``;

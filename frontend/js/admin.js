@@ -56,16 +56,15 @@ function refreshTokenlogin(token) {
   data = {
     refreshToken: token,
   };
-  apicall(
-    "POST",
-    "http://localhost:3000/api/users/refresh",
-    JSON.stringify(data)
-  ).then((res) => {
-    setLocalStorageItem("accessToken", res.accessToken);
-    location.reload();
-  });
+  apicall("POST", `${apiserver}/api/users/refresh`, JSON.stringify(data)).then(
+    (res) => {
+      setLocalStorageItem("accessToken", res.accessToken);
+      location.reload();
+    }
+  );
 }
 
+let apiserver = "http://localhost:3000";
 var refreshToken = getLocalStorageItem(`refreshToken`);
 var accessToken = getLocalStorageItem(`accessToken`);
 
@@ -84,16 +83,16 @@ addButton.addEventListener("click", () => {
     document.getElementById("productimage").files[0]
   );
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", "http://localhost:3000/api/images/uploadimage", true);
+  xhr.open("POST", `${apiserver}/api/images/uploadimage`, true);
   xhr.onload = function () {
     if (xhr.status === 200) {
-      ImageUrl = `http://localhost:3000/api/images/viewimage/${this.responseText}`;
+      ImageUrl = `${apiserver}/api/images/viewimage/${this.responseText}`;
       if (Name && Description && Price && Category && StockQuantity) {
         data = { Name, Description, Price, Category, StockQuantity, ImageUrl };
         authenticate(
           "POST",
           accessToken,
-          "http://localhost:3000/api/products/addproducts",
+          `${apiserver}/api/products/addproducts`,
           data
         )
           .then((res) => {
@@ -116,11 +115,7 @@ addButton.addEventListener("click", () => {
 });
 
 function getproducts() {
-  authenticate(
-    "POST",
-    accessToken,
-    "http://localhost:3000/api/admin/productsadmin"
-  )
+  authenticate("POST", accessToken, `${apiserver}/api/admin/productsadmin`)
     .then(function (res) {
       console.log("WELCOME ADMIN!!");
       email = res.email.email;
@@ -131,7 +126,7 @@ function getproducts() {
       authenticate(
         "GET",
         accessToken,
-        `http://localhost:3000/api/users/viewuser/${email}`
+        `${apiserver}/api/users/viewuser/${email}`
       ).then(function (res) {
         console.log(res);
         document.getElementById("username").innerHTML = `${res.username}`;
@@ -194,7 +189,7 @@ function deleteProducts(id, email) {
   authenticate(
     "DELETE",
     accessToken,
-    `http://localhost:3000/api/products/deleteproducts/${id}`,
+    `${apiserver}/api/products/deleteproducts/${id}`,
     { email: email }
   )
     .then((res) => {
@@ -225,7 +220,7 @@ function editpassword(id) {
       authenticate(
         "PUT",
         accessToken,
-        `http://localhost:3000/api/users/editpassword/${id}`,
+        `${apiserver}/api/users/editpassword/${id}`,
         data
       )
         .then((res) => {
@@ -277,12 +272,7 @@ function saveProducts(id) {
 
   if (Name && Description && Price && Category && StockQuantity) {
     data = { Name, Description, Price, Category, StockQuantity, ImageUrl };
-    authenticate(
-      "POST",
-      accessToken,
-      `http://localhost:3000/api/admin/edit/${id}`,
-      data
-    )
+    authenticate("POST", accessToken, `${apiserver}/api/admin/edit/${id}`, data)
       .then((res) => {
         console.log(res);
         getproducts();
@@ -412,7 +402,7 @@ function saveImage(id, oldimageurl) {
   var xhr = new XMLHttpRequest();
   xhr.open(
     "POST",
-    `http://localhost:3000/api/images/editimage/${id}/${
+    `${apiserver}/api/images/editimage/${id}/${
       oldimageurl[oldimageurl.length - 1]
     }`,
     true
@@ -420,7 +410,7 @@ function saveImage(id, oldimageurl) {
   xhr.onload = function () {
     if (xhr.status === 200) {
       console.log(this.responseText);
-      ImageUrl = `http://localhost:3000/api/images/viewimage/${this.responseText}`;
+      ImageUrl = `${apiserver}/api/images/viewimage/${this.responseText}`;
 
       document
         .getElementById(id)

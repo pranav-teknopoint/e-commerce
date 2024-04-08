@@ -57,6 +57,7 @@ let loginTab = document.getElementById("login-tab");
 let registerButton = document.getElementById("register-new");
 let loginButton = document.getElementById("login-new");
 let saveCheckbox = document.getElementById("savelogin");
+let apiserver = "http://localhost:3000";
 
 registerTab.addEventListener("click", () => {
   registerTab.classList.add("selected");
@@ -82,7 +83,7 @@ loginButton.addEventListener("click", () => {
     password: loginPassword,
   };
 
-  apicall("POST", "http://localhost:3000/api/users/login", JSON.stringify(data))
+  apicall("POST", `${apiserver}/api/users/login`, JSON.stringify(data))
     .then(function (response) {
       accessToken = response.accessToken;
       refreshToken = response.refreshToken;
@@ -93,7 +94,7 @@ loginButton.addEventListener("click", () => {
       authenticate(
         "POST",
         accessToken,
-        "http://localhost:3000/api/products/products"
+        `${apiserver}/api/products/products`
       ).then(function (res) {
         console.log("User valid");
         window.location.href = "./products.html";
@@ -119,11 +120,7 @@ registerButton.addEventListener("click", () => {
     phone: registerPhone,
   };
 
-  apicall(
-    "POST",
-    "http://localhost:3000/api/users/register",
-    JSON.stringify(data)
-  )
+  apicall("POST", `${apiserver}/api/users/register`, JSON.stringify(data))
     .then(function (response) {
       document.querySelector(
         ".register__error-message"
@@ -142,11 +139,7 @@ function refreshTokenlogin(token) {
   data = {
     refreshToken: token,
   };
-  apicall(
-    "POST",
-    "http://localhost:3000/api/users/refresh",
-    JSON.stringify(data)
-  )
+  apicall("POST", `${apiserver}/api/users/refresh`, JSON.stringify(data))
     .then((res) => {
       setLocalStorageItem("accessToken", res.accessToken);
       location.href = "./products.html";

@@ -56,16 +56,15 @@ function refreshTokenlogin(token) {
   data = {
     refreshToken: token,
   };
-  apicall(
-    "POST",
-    "http://localhost:3000/api/users/refresh",
-    JSON.stringify(data)
-  ).then((res) => {
-    setLocalStorageItem("accessToken", res.accessToken);
-    location.reload();
-  });
+  apicall("POST", `${apiserver}/api/users/refresh`, JSON.stringify(data)).then(
+    (res) => {
+      setLocalStorageItem("accessToken", res.accessToken);
+      location.reload();
+    }
+  );
 }
 
+let apiserver = "http://localhost:3000";
 var refreshToken = getLocalStorageItem(`refreshToken`);
 var accessToken = getLocalStorageItem(`accessToken`);
 var email;
@@ -73,7 +72,8 @@ var email;
 let adminButton = document.querySelector(".adminbutton");
 let cardsContainer = document.getElementById("cards-container");
 
-authenticate("POST", accessToken, "http://localhost:3000/api/products/products")
+
+authenticate("POST", accessToken, `${apiserver}/api/products/products`)
   .then(function (res) {
     console.log(res.products);
     email = res.email.email;
@@ -84,7 +84,7 @@ authenticate("POST", accessToken, "http://localhost:3000/api/products/products")
     authenticate(
       "GET",
       accessToken,
-      `http://localhost:3000/api/users/viewuser/${email}`
+      `${apiserver}/api/users/viewuser/${email}`
     ).then(function (res) {
       document.getElementById("username").innerHTML = `${res.username}`;
       document.getElementById("useremail").innerHTML = `${res.email}`;
@@ -123,7 +123,7 @@ authenticate("POST", accessToken, "http://localhost:3000/api/products/products")
     authenticate(
       "GET",
       accessToken,
-      `http://localhost:3000/api/cart/cartnumber/${email}`
+      `${apiserver}/api/cart/cartnumber/${email}`
     ).then((res) => {
       if (res.TotalQty > 0) {
         document.getElementById("cartitems").classList.add("display-flex");
@@ -159,7 +159,7 @@ function filterdata(category) {
   authenticate(
     "POST",
     accessToken,
-    `http://localhost:3000/api/products/category/${category}`
+    `${apiserver}/api/products/category/${category}`
   )
     .then((res) => {
       products = res.products;
@@ -198,12 +198,7 @@ function addtocart(id, email) {
     id,
     user: email,
   };
-  authenticate(
-    "POST",
-    accessToken,
-    "http://localhost:3000/api/cart/addtocart",
-    data
-  )
+  authenticate("POST", accessToken, `${apiserver}/api/cart/addtocart`, data)
     .then(function (res) {
       console.log(res);
       document.getElementById(`carttooltip${id}`).classList.add("display");
@@ -213,7 +208,7 @@ function addtocart(id, email) {
       authenticate(
         "GET",
         accessToken,
-        `http://localhost:3000/api/cart/cartnumber/${email}`
+        `${apiserver}/api/cart/cartnumber/${email}`
       ).then((res) => {
         if (res.TotalQty > 0) {
           document.getElementById("cartitems").classList.add("display-flex");
@@ -236,11 +231,7 @@ let viewCart = document.getElementById("view-cart");
 
 viewCart.addEventListener("click", () => {
   console.log(email);
-  authenticate(
-    "GET",
-    accessToken,
-    `http://localhost:3000/api/cart/viewcart/${email}`
-  )
+  authenticate("GET", accessToken, `${apiserver}/api/cart/viewcart/${email}`)
     .then(function (res) {
       console.log(res);
       window.location.href = "./cart.html";
@@ -268,7 +259,7 @@ function editpassword(id) {
       authenticate(
         "PUT",
         accessToken,
-        `http://localhost:3000/api/users/editpassword/${id}`,
+        `${apiserver}/api/users/editpassword/${id}`,
         data
       )
         .then((res) => {
