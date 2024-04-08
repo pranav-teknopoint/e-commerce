@@ -64,7 +64,7 @@ function refreshTokenlogin(token) {
   );
 }
 
-let apiserver = "http://localhost:3000";
+let apiserver = "https://e-commerce-three-lyart.vercel.app/";
 var refreshToken = getLocalStorageItem(`refreshToken`);
 var accessToken = getLocalStorageItem(`accessToken`);
 var email;

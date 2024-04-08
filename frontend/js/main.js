@@ -57,7 +57,7 @@ let loginTab = document.getElementById("login-tab");
 let registerButton = document.getElementById("register-new");
 let loginButton = document.getElementById("login-new");
 let saveCheckbox = document.getElementById("savelogin");
-let apiserver = "http://localhost:3000";
+let apiserver = "https://e-commerce-three-lyart.vercel.app/";
 
 registerTab.addEventListener("click", () => {
   registerTab.classList.add("selected");
