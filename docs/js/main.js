@@ -104,7 +104,7 @@ loginButton.addEventListener("click", () => {
         let message = JSON.parse(error).message;
         document.querySelector(
           ".login__error-message"
-        ).innerHTML = `${message}!! Try again.`;
+        ).innerHTML = `Invalid Credentials!! Try Again.`;
       });
   } else {
     document.querySelector(
