@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const imageController = require("../controllers/imageController.js");
-const authenticateToken = require("../middlewares/authenticateToken.js");
-const uploadimage = require("../middlewares/uploadimage.js");
 const multer = require("multer");
 const path = require("path");
 
