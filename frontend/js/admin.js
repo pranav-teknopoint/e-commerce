@@ -96,12 +96,11 @@ addButton.addEventListener("click", () => {
           data
         )
           .then((res) => {
-            console.log(res);
             getproducts();
             location.reload();
           })
           .catch((error) => {
-            console.log(error);
+            console.error(error);
             if (refreshToken) {
               refreshTokenlogin(refreshToken);
             }
@@ -128,7 +127,6 @@ function getproducts() {
         accessToken,
         `${apiserver}/api/users/viewuser/${email}`
       ).then(function (res) {
-        console.log(res);
         document.getElementById("username").innerHTML = `${res.username}`;
         document.getElementById("useremail").innerHTML = `${res.email}`;
         document.getElementById("userphone").innerHTML = `${res.phone}`;
@@ -175,8 +173,7 @@ function getproducts() {
       });
     })
     .catch((error) => {
-      console.log(error);
-      console.log("NOT ADMIN!!");
+      console.error(error);
       if (refreshToken) {
         refreshTokenlogin(refreshToken);
       }
@@ -193,12 +190,11 @@ function deleteProducts(id, email) {
     { email: email }
   )
     .then((res) => {
-      console.log(res);
       getproducts();
       location.reload();
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       if (refreshToken) {
         refreshTokenlogin(refreshToken);
       }
@@ -224,7 +220,6 @@ function editpassword(id) {
         data
       )
         .then((res) => {
-          console.log(res);
           document.getElementById(
             "change-message"
           ).innerHTML = `Password Changed Successfully!!`;
@@ -233,7 +228,7 @@ function editpassword(id) {
           }, 3000);
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
           if (refreshToken) {
             refreshTokenlogin(refreshToken);
           }
@@ -274,12 +269,11 @@ function saveProducts(id) {
     data = { Name, Description, Price, Category, StockQuantity, ImageUrl };
     authenticate("POST", accessToken, `${apiserver}/api/admin/edit/${id}`, data)
       .then((res) => {
-        console.log(res);
         getproducts();
         location.reload();
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         if (refreshToken) {
           refreshTokenlogin(refreshToken);
         }
@@ -409,7 +403,6 @@ function saveImage(id, oldimageurl) {
   );
   xhr.onload = function () {
     if (xhr.status === 200) {
-      console.log(this.responseText);
       ImageUrl = `${apiserver}/api/images/viewimage/${this.responseText}`;
 
       document

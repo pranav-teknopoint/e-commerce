@@ -114,7 +114,7 @@ function getCartItems(email) {
       }
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       if (refreshToken) {
         refreshTokenlogin(refreshToken);
       }
@@ -151,7 +151,6 @@ function deleteItem(id, email) {
     data
   )
     .then((res) => {
-      console.log(res);
       getCartItems(email);
       location.reload();
     })
@@ -188,7 +187,7 @@ function filterdata(category) {
       });
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       if (refreshToken) {
         refreshTokenlogin(refreshToken);
       }

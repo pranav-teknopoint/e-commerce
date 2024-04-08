@@ -96,7 +96,6 @@ loginButton.addEventListener("click", () => {
         accessToken,
         `${apiserver}/api/products/products`
       ).then(function (res) {
-        console.log("User valid");
         window.location.href = "./products.html";
       });
     })
@@ -127,8 +126,7 @@ registerButton.addEventListener("click", () => {
       ).innerHTML = `User registered sucessfully!!`;
     })
     .catch(function (error) {
-      console.log(error);
-      // let message = JSON.parse(error).message;
+      console.error(error);
       document.querySelector(
         ".register__error-message"
       ).innerHTML = `${error}!!`;
@@ -145,7 +143,7 @@ function refreshTokenlogin(token) {
       location.href = "./products.html";
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
     });
 }
 var refreshToken = getLocalStorageItem(`refreshToken`);

@@ -72,10 +72,8 @@ var email;
 let adminButton = document.querySelector(".adminbutton");
 let cardsContainer = document.getElementById("cards-container");
 
-
 authenticate("POST", accessToken, `${apiserver}/api/products/products`)
   .then(function (res) {
-    console.log(res.products);
     email = res.email.email;
     products = res.products;
     document.getElementById("productspage").classList.add("display");
@@ -135,7 +133,7 @@ authenticate("POST", accessToken, `${apiserver}/api/products/products`)
     });
   })
   .catch((error) => {
-    console.log(error);
+    console.error(error);
     if (refreshToken) {
       refreshTokenlogin(refreshToken);
     }
@@ -185,7 +183,7 @@ function filterdata(category) {
       });
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       if (refreshToken) {
         refreshTokenlogin(refreshToken);
       }
@@ -193,14 +191,12 @@ function filterdata(category) {
 }
 
 function addtocart(id, email) {
-  console.log(id);
   data = {
     id,
     user: email,
   };
   authenticate("POST", accessToken, `${apiserver}/api/cart/addtocart`, data)
     .then(function (res) {
-      console.log(res);
       document.getElementById(`carttooltip${id}`).classList.add("display");
       setTimeout(() => {
         document.getElementById(`carttooltip${id}`).classList.remove("display");
@@ -220,7 +216,7 @@ function addtocart(id, email) {
       });
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       if (refreshToken) {
         refreshTokenlogin(refreshToken);
       }
@@ -230,14 +226,12 @@ function addtocart(id, email) {
 let viewCart = document.getElementById("view-cart");
 
 viewCart.addEventListener("click", () => {
-  console.log(email);
   authenticate("GET", accessToken, `${apiserver}/api/cart/viewcart/${email}`)
     .then(function (res) {
-      console.log(res);
       window.location.href = "./cart.html";
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       if (refreshToken) {
         refreshTokenlogin(refreshToken);
       }
@@ -263,7 +257,6 @@ function editpassword(id) {
         data
       )
         .then((res) => {
-          console.log(res);
           document.getElementById(
             "change-message"
           ).innerHTML = `Password Changed Successfully!!`;
@@ -272,7 +265,7 @@ function editpassword(id) {
           }, 3000);
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
           if (refreshToken) {
             refreshTokenlogin(refreshToken);
           }
