@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">E-comm</div>
+      <div class="content-wrapper">
+        <div class="login-form">
+          <div class="login-title">
+            <p>Log-in</p>
+          </div>
+          <div class="login-register">
+            <div class="tabs">
+              <div class="tab selected" id="login-tab"><p>Login</p></div>
+              <div class="tab" id="register-tab"><p>Register</p></div>
+            </div>
+            <div class="login display-flex">
+              <input
+                type="email"
+                name="login-email"
+                id="login-email"
+                placeholder="Email"
+              />
+              <input
+                type="password"
+                name="login-password"
+                id="login-password"
+                placeholder="Password"
+              />
+              <input type="button" id="login-new" value="Login" />
+              <div class="login__error-message"></div>
+            </div>
+            <div class="register">
+              <input
+                type="text"
+                name="register-username"
+                id="register-username"
+                placeholder="Username"
+              />
+              <input
+                type="email"
+                name="register-email"
+                id="register-email"
+                placeholder="Email"
+              />
+              <input
+                type="password"
+                name="register-password"
+                id="register-password"
+                placeholder="Password"
+              />
+              <input
+                type="number"
+                name="register-number"
+                id="register-phone"
+                placeholder="Phone"
+              />
+              <!-- pattern="[0-9]+" -->
+              <input type="button" id="register-new" value="Register" />
+              <div class="register__error-message"></div>
+            </div>
+          </div>
+        </div>
+        <div class="login-image">
+          <img src="./assets/login.svg" alt="login" />
+        </div>
+      </div>
+    </div>
+    <script src="./js/main.js"></script>
+  </body>
+</html>

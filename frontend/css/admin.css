@@ -1,0 +1,28 @@
+.admintools {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addproductsinput {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+#adminpage {
+  display: none;
+}
+
+#updateimage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.editors {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
