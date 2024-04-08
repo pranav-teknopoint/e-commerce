@@ -28,9 +28,13 @@ exports.registerUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
   let readUser = await Users.findOne({ email: email });
-  const userValid = readUser.password === password;
 
-  if (!userValid || !readUser) {
+  if (!readUser) {
+  return res.status(401).json({ message: "Invalid credentials" });
+}
+  const userValid = readUser.password === password;
+  
+  if (!userValid) {
     return res.status(401).json({ message: "Invalid credentials" });
   }
 
