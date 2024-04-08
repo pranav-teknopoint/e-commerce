@@ -52,6 +52,20 @@ function removeLocalStorageItem(key) {
   localStorage.removeItem(key);
 }
 
+function refreshTokenlogin(token) {
+  data = {
+    refreshToken: token,
+  };
+  apicall(
+    "POST",
+    "http://localhost:3000/api/users/refresh",
+    JSON.stringify(data)
+  ).then((res) => {
+    setLocalStorageItem("accessToken", res.accessToken);
+    location.reload();
+  });
+}
+
 var refreshToken = getLocalStorageItem(`refreshToken`);
 var accessToken = getLocalStorageItem(`accessToken`);
 var email;
@@ -122,9 +136,9 @@ authenticate("POST", accessToken, "http://localhost:3000/api/products/products")
   })
   .catch((error) => {
     console.log(error);
-    // document.querySelector(
-    //   ".title"
-    // ).innerHTML = `Please login!!</br><a href = "./index.html">Click here</a>`;
+    if (refreshToken) {
+      refreshTokenlogin(refreshToken);
+    }
   });
 
 const categoryArray = [];
@@ -146,11 +160,12 @@ function filterdata(category) {
     "POST",
     accessToken,
     `http://localhost:3000/api/products/category/${category}`
-  ).then((res) => {
-    products = res.products;
-    cardsContainer.innerHTML = ``;
-    products.forEach((e) => {
-      cardsContainer.innerHTML += `<div class="product-card" id="${e._id}">
+  )
+    .then((res) => {
+      products = res.products;
+      cardsContainer.innerHTML = ``;
+      products.forEach((e) => {
+        cardsContainer.innerHTML += `<div class="product-card" id="${e._id}">
             <div class="product-image">
               <img src="${e.ImageUrl}" alt="" />
             </div>
@@ -167,8 +182,14 @@ function filterdata(category) {
               />
               <div class="addedtocart" id="carttooltip${e._id}"><p>Added to cart!!</p></div>
             </div>`;
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      if (refreshToken) {
+        refreshTokenlogin(refreshToken);
+      }
     });
-  });
 }
 
 function addtocart(id, email) {
@@ -182,13 +203,33 @@ function addtocart(id, email) {
     accessToken,
     "http://localhost:3000/api/cart/addtocart",
     data
-  ).then(function (res) {
-    console.log(res);
-    document.getElementById(`carttooltip${id}`).classList.add("display");
-    setTimeout(() => {
-      document.getElementById(`carttooltip${id}`).classList.remove("display");
-    }, 3000);
-  });
+  )
+    .then(function (res) {
+      console.log(res);
+      document.getElementById(`carttooltip${id}`).classList.add("display");
+      setTimeout(() => {
+        document.getElementById(`carttooltip${id}`).classList.remove("display");
+      }, 3000);
+      authenticate(
+        "GET",
+        accessToken,
+        `http://localhost:3000/api/cart/cartnumber/${email}`
+      ).then((res) => {
+        if (res.TotalQty > 0) {
+          document.getElementById("cartitems").classList.add("display-flex");
+          document.getElementById("cartitems").innerHTML = res.TotalQty;
+        } else {
+          document.getElementById("cartitems").classList.remove("display-flex");
+          document.getElementById("cartitems").innerHTML = "";
+        }
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      if (refreshToken) {
+        refreshTokenlogin(refreshToken);
+      }
+    });
 }
 
 let viewCart = document.getElementById("view-cart");
@@ -199,10 +240,17 @@ viewCart.addEventListener("click", () => {
     "GET",
     accessToken,
     `http://localhost:3000/api/cart/viewcart/${email}`
-  ).then(function (res) {
-    console.log(res);
-    window.location.href = "./cart.html";
-  });
+  )
+    .then(function (res) {
+      console.log(res);
+      window.location.href = "./cart.html";
+    })
+    .catch((error) => {
+      console.log(error);
+      if (refreshToken) {
+        refreshTokenlogin(refreshToken);
+      }
+    });
 });
 
 function editpassword(id) {
@@ -222,15 +270,22 @@ function editpassword(id) {
         accessToken,
         `http://localhost:3000/api/users/editpassword/${id}`,
         data
-      ).then((res) => {
-        console.log(res);
-        document.getElementById(
-          "change-message"
-        ).innerHTML = `Password Changed Successfully!!`;
-        setTimeout(() => {
-          document.getElementById("change-message").innerHTML = ``;
-        }, 3000);
-      });
+      )
+        .then((res) => {
+          console.log(res);
+          document.getElementById(
+            "change-message"
+          ).innerHTML = `Password Changed Successfully!!`;
+          setTimeout(() => {
+            document.getElementById("change-message").innerHTML = ``;
+          }, 3000);
+        })
+        .catch((error) => {
+          console.log(error);
+          if (refreshToken) {
+            refreshTokenlogin(refreshToken);
+          }
+        });
     }
   });
 }

@@ -56,6 +56,7 @@ let registerTab = document.getElementById("register-tab");
 let loginTab = document.getElementById("login-tab");
 let registerButton = document.getElementById("register-new");
 let loginButton = document.getElementById("login-new");
+let saveCheckbox = document.getElementById("savelogin");
 
 registerTab.addEventListener("click", () => {
   registerTab.classList.add("selected");
@@ -85,7 +86,9 @@ loginButton.addEventListener("click", () => {
     .then(function (response) {
       accessToken = response.accessToken;
       refreshToken = response.refreshToken;
-      setLocalStorageItem("refreshToken", refreshToken);
+      if (saveCheckbox.checked) {
+        setLocalStorageItem("refreshToken", refreshToken);
+      }
       setLocalStorageItem("accessToken", accessToken);
       authenticate(
         "POST",
@@ -134,3 +137,25 @@ registerButton.addEventListener("click", () => {
       ).innerHTML = `${error}!!`;
     });
 });
+
+function refreshTokenlogin(token) {
+  data = {
+    refreshToken: token,
+  };
+  apicall(
+    "POST",
+    "http://localhost:3000/api/users/refresh",
+    JSON.stringify(data)
+  )
+    .then((res) => {
+      setLocalStorageItem("accessToken", res.accessToken);
+      location.href = "./products.html";
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+var refreshToken = getLocalStorageItem(`refreshToken`);
+if (refreshToken) {
+  refreshTokenlogin(refreshToken);
+}

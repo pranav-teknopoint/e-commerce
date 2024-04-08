@@ -51,6 +51,24 @@ exports.loginUser = async (req, res) => {
   });
 };
 
+exports.refreshUser = async (req, res) => {
+  const refreshToken = req.body.refreshToken;
+  const DBrefreshToken = await Users.findOne({ refreshToken: refreshToken });
+  if (!refreshToken || !DBrefreshToken) {
+    return res.sendStatus(403); // Forbidden
+  }
+
+  jwt.verify(refreshToken, REFRESH_TOKEN_SECRET, (err, user) => {
+    if (err) {
+      return res.sendStatus(403); // Forbidden
+    }
+    const accessToken = jwt.sign({ email: user.email }, ACCESS_TOKEN_SECRET, {
+      expiresIn: "30m",
+    });
+    res.json({ accessToken });
+  });
+};
+
 exports.viewUser = async (req, res) => {
   let email = req.params.email;
   try {

@@ -52,6 +52,20 @@ function removeLocalStorageItem(key) {
   localStorage.removeItem(key);
 }
 
+function refreshTokenlogin(token) {
+  data = {
+    refreshToken: token,
+  };
+  apicall(
+    "POST",
+    "http://localhost:3000/api/users/refresh",
+    JSON.stringify(data)
+  ).then((res) => {
+    setLocalStorageItem("accessToken", res.accessToken);
+    location.reload();
+  });
+}
+
 var refreshToken = getLocalStorageItem(`refreshToken`);
 var accessToken = getLocalStorageItem(`accessToken`);
 
@@ -89,6 +103,9 @@ addButton.addEventListener("click", () => {
           })
           .catch((error) => {
             console.log(error);
+            if (refreshToken) {
+              refreshTokenlogin(refreshToken);
+            }
           });
       }
     } else {
@@ -165,8 +182,12 @@ function getproducts() {
     .catch((error) => {
       console.log(error);
       console.log("NOT ADMIN!!");
+      if (refreshToken) {
+        refreshTokenlogin(refreshToken);
+      }
     });
 }
+
 getproducts();
 
 function deleteProducts(id, email) {
@@ -175,11 +196,18 @@ function deleteProducts(id, email) {
     accessToken,
     `http://localhost:3000/api/products/deleteproducts/${id}`,
     { email: email }
-  ).then((res) => {
-    console.log(res);
-    getproducts();
-    location.reload();
-  });
+  )
+    .then((res) => {
+      console.log(res);
+      getproducts();
+      location.reload();
+    })
+    .catch((error) => {
+      console.log(error);
+      if (refreshToken) {
+        refreshTokenlogin(refreshToken);
+      }
+    });
 }
 
 function editpassword(id) {
@@ -199,15 +227,22 @@ function editpassword(id) {
         accessToken,
         `http://localhost:3000/api/users/editpassword/${id}`,
         data
-      ).then((res) => {
-        console.log(res);
-        document.getElementById(
-          "change-message"
-        ).innerHTML = `Password Changed Successfully!!`;
-        setTimeout(() => {
-          document.getElementById("change-message").innerHTML = ``;
-        }, 3000);
-      });
+      )
+        .then((res) => {
+          console.log(res);
+          document.getElementById(
+            "change-message"
+          ).innerHTML = `Password Changed Successfully!!`;
+          setTimeout(() => {
+            document.getElementById("change-message").innerHTML = ``;
+          }, 3000);
+        })
+        .catch((error) => {
+          console.log(error);
+          if (refreshToken) {
+            refreshTokenlogin(refreshToken);
+          }
+        });
     }
   });
 }
@@ -255,6 +290,9 @@ function saveProducts(id) {
       })
       .catch((error) => {
         console.log(error);
+        if (refreshToken) {
+          refreshTokenlogin(refreshToken);
+        }
       });
   }
 }
