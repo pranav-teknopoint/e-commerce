@@ -30,7 +30,7 @@ exports.loginUser = async (req, res) => {
   let readUser = await Users.findOne({ email: email });
   const userValid = readUser.password === password;
 
-  if (!userValid) {
+  if (!userValid || !readUser) {
     return res.status(401).json({ message: "Invalid credentials" });
   }
 

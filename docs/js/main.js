@@ -78,33 +78,39 @@ loginTab.addEventListener("click", () => {
 loginButton.addEventListener("click", () => {
   let loginEmail = document.getElementById("login-email").value;
   let loginPassword = document.getElementById("login-password").value;
-  data = {
-    email: loginEmail,
-    password: loginPassword,
-  };
+  if (loginEmail && loginPassword) {
+    data = {
+      email: loginEmail,
+      password: loginPassword,
+    };
 
-  apicall("POST", `${apiserver}/api/users/login`, JSON.stringify(data))
-    .then(function (response) {
-      accessToken = response.accessToken;
-      refreshToken = response.refreshToken;
-      if (saveCheckbox.checked) {
-        setLocalStorageItem("refreshToken", refreshToken);
-      }
-      setLocalStorageItem("accessToken", accessToken);
-      authenticate(
-        "POST",
-        accessToken,
-        `${apiserver}/api/products/products`
-      ).then(function (res) {
-        window.location.href = "./products.html";
+    apicall("POST", `${apiserver}/api/users/login`, JSON.stringify(data))
+      .then(function (response) {
+        accessToken = response.accessToken;
+        refreshToken = response.refreshToken;
+        if (saveCheckbox.checked) {
+          setLocalStorageItem("refreshToken", refreshToken);
+        }
+        setLocalStorageItem("accessToken", accessToken);
+        authenticate(
+          "POST",
+          accessToken,
+          `${apiserver}/api/products/products`
+        ).then(function (res) {
+          window.location.href = "./products.html";
+        });
+      })
+      .catch(function (error) {
+        let message = JSON.parse(error).message;
+        document.querySelector(
+          ".login__error-message"
+        ).innerHTML = `${message}!! Try again.`;
       });
-    })
-    .catch(function (error) {
-      let message = JSON.parse(error).message;
-      document.querySelector(
-        ".login__error-message"
-      ).innerHTML = `${message}!! Try again.`;
-    });
+  } else {
+    document.querySelector(
+      ".login__error-message"
+    ).innerHTML = `Please enter Email and Password!!`;
+  }
 });
 
 registerButton.addEventListener("click", () => {
@@ -112,25 +118,31 @@ registerButton.addEventListener("click", () => {
   let registerEmail = document.getElementById("register-email").value;
   let registerPassword = document.getElementById("register-password").value;
   let registerPhone = document.getElementById("register-phone").value;
-  data = {
-    username: registerName,
-    email: registerEmail,
-    password: registerPassword,
-    phone: registerPhone,
-  };
+  if (registerName && registerPassword && registerEmail && registerPhone) {
+    data = {
+      username: registerName,
+      email: registerEmail,
+      password: registerPassword,
+      phone: registerPhone,
+    };
 
-  apicall("POST", `${apiserver}/api/users/register`, JSON.stringify(data))
-    .then(function (response) {
-      document.querySelector(
-        ".register__error-message"
-      ).innerHTML = `User registered sucessfully!!`;
-    })
-    .catch(function (error) {
-      console.error(error);
-      document.querySelector(
-        ".register__error-message"
-      ).innerHTML = `${error}!!`;
-    });
+    apicall("POST", `${apiserver}/api/users/register`, JSON.stringify(data))
+      .then(function (response) {
+        document.querySelector(
+          ".register__error-message"
+        ).innerHTML = `User registered sucessfully!!`;
+      })
+      .catch(function (error) {
+        console.error(error);
+        document.querySelector(
+          ".register__error-message"
+        ).innerHTML = `${error}!!`;
+      });
+  } else {
+    document.querySelector(
+      ".register__error-message"
+    ).innerHTML = `All details are required!!`;
+  }
 });
 
 function refreshTokenlogin(token) {
