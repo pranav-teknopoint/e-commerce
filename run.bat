@@ -1,2 +1,2 @@
-frontend\index.html
+docs\index.html
 cd backendnode && npm start
