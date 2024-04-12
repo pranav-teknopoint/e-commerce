@@ -33,83 +33,85 @@
         <img src="./assets/logout.svg" alt="logout" />
       </div>
     </section>
-    <section id="adminpage" class="--display">
-      <div class="products-title">
-        <p>Admin Panel</p>
-      </div>
-      <div class="products-nav">
-        <div class="user-name">
-          <div class="user-profile" id="user-profile">
-            <span class="material-symbols-rounded"> person </span>
-          </div>
-          <p>
-            Welcome, <span id="username"><!--dynamic--></span> (admin)
-          </p>
+    <section id="adminpage">
+      <div id="navbar">
+        <div class="products-title">
+          <p>Admin Panel</p>
         </div>
-        <!-- <div class="categories" id="product-categories">
+        <div class="products-nav">
+          <div class="user-name">
+            <div class="user-profile" id="user-profile">
+              <span class="material-symbols-rounded"> person </span>
+            </div>
+            <p>
+              Welcome, <span id="username"><!--dynamic--></span> (admin)
+            </p>
+          </div>
+          <!-- <div class="categories" id="product-categories">
           
         </div> -->
-        <!-- <div class="view-cart" id="view-cart">
+          <!-- <div class="view-cart" id="view-cart">
           <span class="material-symbols-rounded"> local_mall </span>
         </div> -->
-        <div class="cart-back" id="cart-back">
-          <span class="material-symbols-rounded"> arrow_back </span>
-          <p>Back to products</p>
+          <div class="cart-back" id="cart-back">
+            <span class="material-symbols-rounded"> arrow_back </span>
+            <p>Back to products</p>
+          </div>
+          <div class="logout" id="logout">
+            <p>logout</p>
+            <span class="material-symbols-rounded"> logout </span>
+          </div>
         </div>
-        <div class="logout" id="logout">
-          <p>logout</p>
-          <span class="material-symbols-rounded"> logout </span>
-        </div>
-      </div>
-      <div class="user-details">
-        <div class="details">
-          <!-- <div class="username">
+        <div class="user-details">
+          <div class="details">
+            <!-- <div class="username">
             <p>Your username: <span id="username"></span></p>
           </div> -->
-          <div class="useremail">
-            <p>
-              Your email: <span id="useremail"><!-- dynamic --></span>
-            </p>
+            <div class="useremail">
+              <p>
+                Your email: <span id="useremail"><!-- dynamic --></span>
+              </p>
+            </div>
+            <div class="userphone">
+              <p>
+                Your phone: <span id="userphone"><!-- dynamic --></span>
+              </p>
+            </div>
           </div>
-          <div class="userphone">
-            <p>
-              Your phone: <span id="userphone"><!-- dynamic --></span>
-            </p>
-          </div>
-        </div>
-        <div class="change-password">
-          <!-- <input
+          <div class="change-password">
+            <!-- <input
             type="button"
             value="Change Password"
             id="editpassword"
             onclick="editpassword('${id}')"
           /> -->
-          <div id="password-message"></div>
-          <div class="password-input" id="password-edit">
-            <input
-              type="password"
-              name="old password"
-              id="oldpassword"
-              placeholder="Enter oldpassword"
-            />
-            <input
-              type="password"
-              name="old password"
-              id="newpassword"
-              placeholder="Enter New Password"
-            />
-            <input
-              type="password"
-              name="old password"
-              id="confirmnewpassword"
-              placeholder="Confirm New Password"
-            />
-            <input
-              type="button"
-              name="old password"
-              id="savepassword"
-              value="Save Password"
-            />
+            <div id="password-message"></div>
+            <div class="password-input" id="password-edit">
+              <input
+                type="password"
+                name="old password"
+                id="oldpassword"
+                placeholder="Enter oldpassword"
+              />
+              <input
+                type="password"
+                name="old password"
+                id="newpassword"
+                placeholder="Enter New Password"
+              />
+              <input
+                type="password"
+                name="old password"
+                id="confirmnewpassword"
+                placeholder="Confirm New Password"
+              />
+              <input
+                type="button"
+                name="old password"
+                id="savepassword"
+                value="Save Password"
+              />
+            </div>
           </div>
         </div>
       </div>

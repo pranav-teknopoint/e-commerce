@@ -2,7 +2,7 @@
 
 A fully functional E-commerce application using Node.js, MongoDB and HTML, CSS, Javascript.<br>
 
-This project is running live at [E-Commerce.](https://pranav-teknopoint.github.io/e-commerce)<br>
+This project is running live at [E-Commerce.](https://pranavtelangade.github.io/e-commerce)<br>
 
 ## To run the project locally:<br>
 

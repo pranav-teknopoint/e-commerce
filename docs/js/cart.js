@@ -2,6 +2,7 @@ var refreshToken = getLocalStorageItem(`refreshToken`);
 var accessToken = getLocalStorageItem(`accessToken`);
 var email;
 let cartItems = document.getElementById("cards-container");
+let cardsContainer = document.getElementById("cards-container");
 
 authenticate("POST", accessToken, `${apiserver}/api/products/products`, {})
   .then(function (res) {
@@ -46,6 +47,14 @@ function getCartItems(email) {
     });
 }
 
+function getallproducts() {
+  document.querySelectorAll(".category-button").forEach((e) => {
+    e.style.backgroundColor = "#5c8374";
+  });
+  cartItems.innerHTML = ``;
+  getCartItems(email);
+}
+
 function createcartItems(product) {
   cartItems.innerHTML += `<div class="product-card" id="${product._id}">
             <div class="product-image">
@@ -76,8 +85,7 @@ function deleteItem(id, email) {
     data
   )
     .then((res) => {
-      getCartItems(email);
-      location.reload();
+      getallproducts();
     })
     .catch((error) => {
       console.error(error);
@@ -96,7 +104,6 @@ function creatcategorybutton(category) {
     categories.innerHTML += `<input type="button" class="category-button" value="${category}" id="${category}" onclick = "filterdata('${category}')"/>`;
   }
 }
-let cardsContainer = document.getElementById("cards-container");
 
 function filterdata(category) {
   document.querySelectorAll(".category-button").forEach((e) => {

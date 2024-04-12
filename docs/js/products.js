@@ -23,7 +23,7 @@ authenticate("POST", accessToken, `${apiserver}/api/products/products`)
       document.querySelector(".change-password").innerHTML += `<input
             type="button"
             value="Change Password"
-            id="editpassword"
+            id="editpassword-${res._id}"
             onclick="editpassword('${res._id}')"
           />`;
       if (res.role == "admin") {
@@ -33,23 +33,7 @@ authenticate("POST", accessToken, `${apiserver}/api/products/products`)
 
     products.forEach((e) => {
       creatcategorybutton(`${e.Category}`);
-      cardsContainer.innerHTML += `<div class="product-card" id="${e._id}">
-            <div class="product-image">
-              <img src="${e.ImageUrl}" alt="" />
-            </div>
-            <div class="product-details">
-              <div id="product-name">${e.Name}</div>
-              <div id="product-description">${e.Description}</div>
-              <div id="product-price">$${e.Price}</div>
-              <div id="product-category">${e.Category}</div>
-              <input
-              type="button"
-              value="Add to cart"
-              id="${e._id}"
-              onclick="addtocart('${e._id}', '${email}')"
-              />
-              <div class="addedtocart" id="carttooltip${e._id}"><p>Added to cart!!</p></div>
-            </div>`;
+      createProductCards(e);
     });
     authenticate(
       "GET",
@@ -96,7 +80,40 @@ function filterdata(category) {
       products = res.products;
       cardsContainer.innerHTML = ``;
       products.forEach((e) => {
-        cardsContainer.innerHTML += `<div class="product-card" id="${e._id}">
+        createProductCards(e);
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      if (refreshToken) {
+        refreshTokenlogin(refreshToken);
+      }
+    });
+}
+
+function getallproducts() {
+  document.querySelectorAll(".category-button").forEach((e) => {
+    e.style.backgroundColor = "#5c8374";
+  });
+  authenticate("POST", accessToken, `${apiserver}/api/products/products`)
+    .then(function (res) {
+      products = res.products;
+      cardsContainer.innerHTML = ``;
+      products.forEach((e) => {
+        creatcategorybutton(`${e.Category}`);
+        createProductCards(e);
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      if (refreshToken) {
+        refreshTokenlogin(refreshToken);
+      }
+    });
+}
+
+function createProductCards(e) {
+  cardsContainer.innerHTML += `<div class="product-card" id="${e._id}">
             <div class="product-image">
               <img src="${e.ImageUrl}" alt="" />
             </div>
@@ -113,14 +130,6 @@ function filterdata(category) {
               />
               <div class="addedtocart" id="carttooltip${e._id}"><p>Added to cart!!</p></div>
             </div>`;
-      });
-    })
-    .catch((error) => {
-      console.error(error);
-      if (refreshToken) {
-        refreshTokenlogin(refreshToken);
-      }
-    });
 }
 
 function addtocart(id, email) {
@@ -171,14 +180,26 @@ viewCart.addEventListener("click", () => {
     });
 });
 
+function cancelpassword(id) {
+  document.getElementById("password-edit").classList.remove("display-flex");
+  document.getElementById(`editpassword-${id}`).value = "Change Password";
+  document
+    .getElementById(`editpassword-${id}`)
+    .setAttribute("onclick", `editpassword('${id}');`);
+}
+
 function editpassword(id) {
   document.getElementById("password-edit").classList.add("display-flex");
-  oldPassword = document.getElementById("oldpassword");
-  newPassword = document.getElementById("newpassword");
-  confirmPassword = document.getElementById("confirmnewpassword");
-  savePassword = document.getElementById("savepassword");
+  document.getElementById(`editpassword-${id}`).value = "Cancel";
+  document
+    .getElementById(`editpassword-${id}`)
+    .setAttribute("onclick", `cancelpassword('${id}');`);
+  let oldPassword = document.getElementById("oldpassword");
+  let newPassword = document.getElementById("newpassword");
+  let confirmPassword = document.getElementById("confirmnewpassword");
+  let savePassword = document.getElementById("savepassword");
   savePassword.addEventListener("click", () => {
-    if (newPassword.value == confirmPassword.value) {
+    if (newPassword.value === confirmPassword.value) {
       const data = {
         id: id,
         newpassword: confirmPassword.value,

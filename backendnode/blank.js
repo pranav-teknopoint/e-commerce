@@ -31,13 +31,13 @@
 //     ImageUrl,
 //   });
 //   await newproduct.save();
-//   console.log("Admin User Added!!", newproduct);
+//   console.log("Product Added!!", newproduct);
 // }
 
 // let data = [
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac16.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac16.jpg",
 //     Name: "Google Pixel 6",
 //     Description: 'Flagship smartphone with 6.4" OLED display',
 //     Price: 799,
@@ -49,7 +49,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac19.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac19.jpg",
 //     Name: "Motorola Edge 20",
 //     Description: "5G-enabled smartphone with Snapdragon 778G",
 //     Price: 499,
@@ -61,7 +61,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac1a.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac1a.jpg",
 //     Name: "Apple AirPods Pro",
 //     Description: "High-quality noise-cancelling earphones",
 //     Price: 249,
@@ -73,7 +73,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac1b.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac1b.jpg",
 //     Name: "Sony WH-1000XM4",
 //     Description:
 //       "Wireless over-ear headphones with industry-leading noise cancellation",
@@ -86,7 +86,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac1c.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac1c.jpg",
 //     Name: "Samsung Galaxy Buds Pro",
 //     Description:
 //       "True wireless earbuds with intelligent active noise cancellation",
@@ -99,7 +99,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac1d.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac1d.jpg",
 //     Name: "Google Pixelbook Go",
 //     Description: "Ultra-thin Chromebook with up to 12 hours of battery life",
 //     Price: 649,
@@ -111,7 +111,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac1e.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac1e.jpg",
 //     Name: 'Apple MacBook Pro 13"',
 //     Description: "Powerful laptop with M1 chip and Retina display",
 //     Price: 1299,
@@ -123,7 +123,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac18.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac18.jpg",
 //     Name: "Samsung Galaxy S21",
 //     Description: "Ultra-fast 5G smartphone with 120Hz display",
 //     Price: 899,
@@ -135,7 +135,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac22.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac22.jpg",
 //     Name: "Samsung Odyssey G9",
 //     Description: '49" curved gaming monitor with 240Hz refresh rate',
 //     Price: 1499,
@@ -147,7 +147,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac17.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac17.jpg",
 //     Name: "Apple iPhone 13",
 //     Description: "Powerful smartphone with A15 Bionic chip",
 //     Price: 999,
@@ -159,7 +159,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac21.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac21.jpg",
 //     Name: "Apple iPad Air",
 //     Description: '10.9" tablet with A14 Bionic chip and True Tone display',
 //     Price: 599,
@@ -171,7 +171,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac25.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac25.jpg",
 //     Name: "Apple Watch Series 7",
 //     Description: "Advanced smartwatch with always-on Retina display",
 //     Price: 399,
@@ -183,7 +183,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac24.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac24.jpg",
 //     Name: "Razer Blade 15",
 //     Description: "Powerful gaming laptop with NVIDIA GeForce RTX 3080 GPU",
 //     Price: 2499,
@@ -195,7 +195,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac23.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac23.jpg",
 //     Name: "LG UltraGear 27GN950-B",
 //     Description: '27" 4K UHD Nano IPS gaming monitor with G-Sync compatibility',
 //     Price: 799,
@@ -207,7 +207,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac28.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac28.jpg",
 //     Name: "Apple HomePod Mini",
 //     Description: "Compact smart speaker with Siri voice control",
 //     Price: 99,
@@ -219,7 +219,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac27.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac27.jpg",
 //     Name: "Google Nest Hub Max",
 //     Description:
 //       'Smart display with 10" HD screen and built-in Google Assistant',
@@ -232,7 +232,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac26.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac26.jpg",
 //     Name: "Samsung Galaxy Watch 4",
 //     Description: "Health and fitness smartwatch with built-in GPS",
 //     Price: 249,
@@ -244,7 +244,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac29.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac29.jpg",
 //     Name: "Samsung SmartThings Hub V3",
 //     Description:
 //       "Connectivity hub for smart home devices with Zigbee and Z-Wave support",
@@ -257,7 +257,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac20.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac20.jpg",
 //     Name: "Microsoft Surface Pro 8",
 //     Description: "Versatile 2-in-1 laptop with Intel Core i7 processor",
 //     Price: 1299,
@@ -269,7 +269,7 @@
 //   },
 //   {
 //     ImageUrl:
-//       "http://localhost:3000/api/images/viewimage/6607b2d4bb5333493572ac1f.jpg",
+//       "https://e-commerce-hkzp.onrender.com/api/images/viewimage/6607b2d4bb5333493572ac1f.jpg",
 //     Name: "Samsung Galaxy Tab S7+",
 //     Description: 'Premium Android tablet with 12.4" Super AMOLED display',
 //     Price: 849,

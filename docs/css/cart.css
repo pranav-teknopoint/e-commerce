@@ -44,6 +44,7 @@
 .cart-back:hover {
   background: #1b4242;
   color: #f2f2f2;
+  scale: 1.1;
 }
 
 .cart-value {
@@ -55,4 +56,35 @@
   padding: 20px;
   background: #5c8374;
   border-radius: 10px;
+}
+
+@media screen and (max-width: 767px) {
+  .cart-value {
+    position: sticky;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+
+  .emptycart {
+    margin-top: 10px;
+    flex-direction: column;
+  }
+  .empty-message {
+    width: 100%;
+    padding: 10px;
+  }
+  .message-content p {
+    font-size: 30px;
+  }
+  .message-content a {
+    font-size: 35px;
+  }
+
+  .empty-image {
+    width: 65%;
+    align-self: center;
+  }
 }

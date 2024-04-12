@@ -32,92 +32,94 @@
       </div>
     </section>
     <section id="productspage">
-      <div class="products-title">
-        <p>Products</p>
-      </div>
-      <div class="products-nav">
-        <div class="user-name">
-          <div class="user-profile" id="user-profile">
-            <div class="tooltip"><p>User</p></div>
-            <span class="material-symbols-rounded"> person </span>
+      <div id="navbar">
+        <div class="products-title">
+          <p>Products</p>
+        </div>
+        <div class="products-nav">
+          <div class="user-name">
+            <div class="user-profile" id="user-profile">
+              <div class="tooltip"><p>User</p></div>
+              <span class="material-symbols-rounded"> person </span>
+            </div>
+            <p>
+              Hello, <span id="username"><!--dynamic--></span>
+            </p>
           </div>
-          <p>
-            Hello, <span id="username"><!--dynamic--></span>
-          </p>
+          <div class="categories" id="product-categories">
+            <input
+              type="button"
+              class="category-button"
+              value="All"
+              id="Allproducts"
+              onclick="getallproducts()"
+            />
+            <!-- dynamic -->
+          </div>
+          <div class="view-cart" id="view-cart">
+            <div class="tooltip"><p>Cart</p></div>
+            <span class="material-symbols-rounded"> local_mall </span>
+            <div id="cartitems"></div>
+          </div>
+          <div class="adminbutton">
+            <div class="tooltip"><p>Admin tools</p></div>
+            <span class="material-symbols-rounded"> admin_panel_settings </span>
+          </div>
+          <div class="logout" id="logout">
+            <p>logout</p>
+            <span class="material-symbols-rounded"> logout </span>
+          </div>
         </div>
-        <div class="categories" id="product-categories">
-          <input
-            type="button"
-            class="category-button"
-            value="All"
-            id="Allproducts"
-            onclick="window.location.reload()"
-          />
-          <!-- dynamic -->
-        </div>
-        <div class="view-cart" id="view-cart">
-          <div class="tooltip"><p>Cart</p></div>
-          <span class="material-symbols-rounded"> local_mall </span>
-          <div id="cartitems"></div>
-        </div>
-        <div class="adminbutton">
-          <div class="tooltip"><p>Admin tools</p></div>
-          <span class="material-symbols-rounded"> admin_panel_settings </span>
-        </div>
-        <div class="logout" id="logout">
-          <p>logout</p>
-          <span class="material-symbols-rounded"> logout </span>
-        </div>
-      </div>
-      <div class="user-details">
-        <div class="details">
-          <!-- <div class="username">
+        <div class="user-details">
+          <div class="details">
+            <!-- <div class="username">
             <p>Your username: <span id="username"></span></p>
           </div> -->
-          <div class="useremail">
-            <p>
-              Your email: <span id="useremail"><!-- dynamic --></span>
-            </p>
+            <div class="useremail">
+              <p>
+                Your email: <span id="useremail"><!-- dynamic --></span>
+              </p>
+            </div>
+            <div class="userphone">
+              <p>
+                Your phone: <span id="userphone"><!-- dynamic --></span>
+              </p>
+            </div>
           </div>
-          <div class="userphone">
-            <p>
-              Your phone: <span id="userphone"><!-- dynamic --></span>
-            </p>
-          </div>
-        </div>
-        <div class="change-password">
-          <!-- <input
+          <div class="change-password">
+            <!-- <input
             type="button"
             value="Change Password"
             id="editpassword"
             onclick="editpassword('${id}')"
           /> -->
-          <div id="password-message"></div>
-          <div class="password-input" id="password-edit">
-            <input
-              type="password"
-              name="old password"
-              id="oldpassword"
-              placeholder="Enter oldpassword"
-            />
-            <input
-              type="password"
-              name="old password"
-              id="newpassword"
-              placeholder="Enter New Password"
-            />
-            <input
-              type="password"
-              name="old password"
-              id="confirmnewpassword"
-              placeholder="Confirm New Password"
-            />
-            <input
-              type="button"
-              name="old password"
-              id="savepassword"
-              value="Save Password"
-            />
+            <div id="password-message"></div>
+            <div class="password-input" id="password-edit">
+              <input
+                type="password"
+                name="old password"
+                id="oldpassword"
+                placeholder="Enter oldpassword"
+              />
+              <input
+                type="password"
+                name="old password"
+                id="newpassword"
+                placeholder="Enter New Password"
+              />
+              <input
+                type="password"
+                name="old password"
+                id="confirmnewpassword"
+                placeholder="Confirm New Password"
+              />
+              <input
+                type="button"
+                name="old password"
+                id="savepassword"
+                value="Save Password"
+              />
+            </div>
           </div>
         </div>
       </div>

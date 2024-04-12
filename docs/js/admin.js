@@ -1,8 +1,9 @@
 var refreshToken = getLocalStorageItem(`refreshToken`);
 var accessToken = getLocalStorageItem(`accessToken`);
+var ImageUrl;
 
 let addButton = document.getElementById("addproducts");
-var ImageUrl;
+let cardsContainer = document.getElementById("cards-container");
 
 addButton.addEventListener("click", () => {
   let Name = document.getElementById("newproductname").value;
@@ -30,8 +31,12 @@ addButton.addEventListener("click", () => {
           data
         )
           .then((res) => {
-            getproducts();
-            location.reload();
+            getallproducts();
+            document.getElementById("newproductname").value = ``;
+            document.getElementById("newproductdescription").value = ``;
+            document.getElementById("newproductprice").value = ``;
+            document.getElementById("newproductcategory").value = ``;
+            document.getElementById("newproductstockquantity").value = ``;
           })
           .catch((error) => {
             console.error(error);
@@ -47,34 +52,61 @@ addButton.addEventListener("click", () => {
   xhr.send(formData);
 });
 
-function getproducts() {
-  authenticate("POST", accessToken, `${apiserver}/api/admin/productsadmin`)
-    .then(function (res) {
-      console.log("WELCOME ADMIN!!");
-      email = res.email.email;
-      products = res.products;
-      document.getElementById("adminpage").classList.add("display");
-      document.getElementById("unauthorized").classList.remove("display-flex");
+authenticate("POST", accessToken, `${apiserver}/api/admin/productsadmin`)
+  .then(function (res) {
+    console.log("WELCOME ADMIN!!");
+    email = res.email.email;
+    products = res.products;
+    document.getElementById("adminpage").classList.add("display");
+    document.getElementById("unauthorized").classList.remove("display-flex");
 
-      authenticate(
-        "GET",
-        accessToken,
-        `${apiserver}/api/users/viewuser/${email}`
-      ).then(function (res) {
-        document.getElementById("username").innerHTML = `${res.username}`;
-        document.getElementById("useremail").innerHTML = `${res.email}`;
-        document.getElementById("userphone").innerHTML = `${res.phone}`;
-        document.querySelector(".change-password").innerHTML += `<input
+    authenticate(
+      "GET",
+      accessToken,
+      `${apiserver}/api/users/viewuser/${email}`
+    ).then(function (res) {
+      document.getElementById("username").innerHTML = `${res.username}`;
+      document.getElementById("useremail").innerHTML = `${res.email}`;
+      document.getElementById("userphone").innerHTML = `${res.phone}`;
+      document.querySelector(".change-password").innerHTML += `<input
             type="button"
             value="Change Password"
             id="editpassword"
             onclick="editpassword('${res._id}')"
           />`;
-      });
+    });
 
-      let cardsContainer = document.getElementById("cards-container");
+    products.forEach((e) => {
+      createProductscards(e);
+    });
+  })
+  .catch((error) => {
+    console.error(error);
+    if (refreshToken) {
+      refreshTokenlogin(refreshToken);
+    }
+  });
+
+function getallproducts() {
+  cardsContainer.innerHTML = ``;
+  authenticate("POST", accessToken, `${apiserver}/api/admin/productsadmin`)
+    .then(function (res) {
+      email = res.email.email;
+      products = res.products;
       products.forEach((e) => {
-        cardsContainer.innerHTML += `<div class="product-card" id="${e._id}">
+        createProductscards(e);
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      if (refreshToken) {
+        refreshTokenlogin(refreshToken);
+      }
+    });
+}
+
+function createProductscards(e) {
+  cardsContainer.innerHTML += `<div class="product-card" id="${e._id}">
             <div class="product-image">
               <img src="${e.ImageUrl}" alt="" />
               <input
@@ -104,17 +136,7 @@ function getproducts() {
               />
             </div>
           </div>`;
-      });
-    })
-    .catch((error) => {
-      console.error(error);
-      if (refreshToken) {
-        refreshTokenlogin(refreshToken);
-      }
-    });
 }
-
-getproducts();
 
 function deleteProducts(id, email) {
   authenticate(
@@ -124,8 +146,7 @@ function deleteProducts(id, email) {
     { email: email }
   )
     .then((res) => {
-      getproducts();
-      location.reload();
+      getallproducts();
     })
     .catch((error) => {
       console.error(error);
@@ -203,8 +224,7 @@ function saveProducts(id) {
     data = { Name, Description, Price, Category, StockQuantity, ImageUrl };
     authenticate("POST", accessToken, `${apiserver}/api/admin/edit/${id}`, data)
       .then((res) => {
-        getproducts();
-        location.reload();
+        getallproducts();
       })
       .catch((error) => {
         console.error(error);
@@ -283,7 +303,7 @@ function editProducts(id) {
                 type="button"
                 value="Cancel"
                 id="cancel${id}"
-                onclick="window.location.reload();"
+                onclick="getallproducts();"
               /></div>`;
 }
 
@@ -314,7 +334,7 @@ function editImage(id) {
                 type="button"
                 value="Cancel"
                 id="cancel${id}"
-                onclick="window.location.reload();"
+                onclick="getallproducts();"
               /></div>
             </form>`;
 }
