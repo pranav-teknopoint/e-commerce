@@ -12,6 +12,25 @@ body {
   transition: all 0.3s ease;
 }
 
+.light {
+  background: white !important;
+  color: #495464 !important;
+}
+
+.grey {
+  background: #bbbfca !important;
+}
+
+.light-grey {
+  background: #e8e8e8 !important;
+  color: #495464 !important;
+}
+
+.buttons {
+  background: #495464 !important  ;
+  color: #e8e8e8 !important;
+}
+
 .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -206,5 +225,9 @@ input[type="button"] {
   }
   .loggedoutimg img {
     width: 100%;
+  }
+  .light-grey-small {
+    background: #e8e8e8 !important;
+    color: #495464 !important;
   }
 }

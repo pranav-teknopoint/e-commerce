@@ -11,6 +11,7 @@ authenticate("POST", accessToken, `${apiserver}/api/products/products`, {})
     email = res.email.email;
     getCartItems(email);
     document.getElementById("username").innerHTML = `${email}`;
+    checkdarkmode();
   })
   .catch((error) => {
     document.getElementById("unauthorized").classList.add("display-flex");
@@ -37,6 +38,7 @@ function getCartItems(email) {
         });
         total_value = price.sum();
         document.getElementById("total-value").innerHTML = total_value;
+        checkdarkmode();
       }
     })
     .catch((error) => {
@@ -117,6 +119,7 @@ function filterdata(category) {
       products.forEach((product) => {
         createcartItems(product);
       });
+      checkdarkmode();
     })
     .catch((error) => {
       console.error(error);
@@ -133,11 +136,4 @@ document.getElementById("cart-back").addEventListener("click", () => {
 let userProfile = document.getElementById("user-profile");
 userProfile.addEventListener("click", () => {
   document.querySelector(".user-details").classList.toggle("display");
-});
-
-let logOut = document.getElementById("logout");
-logOut.addEventListener("click", () => {
-  removeLocalStorageItem(`accessToken`);
-  removeLocalStorageItem(`refreshToken`);
-  window.location.href = "./index.html";
 });

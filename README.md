@@ -14,6 +14,7 @@ This project is running live at [E-Commerce.](https://pranavtelangade.github.io/
 • Create a new Cluster.<br>
 • Get your connection URI from MongoDB.<br>
 • Create a .env file in the backendnode folder with MONGO_URI variable.<br>
+
 ```
 MONGO_URI=<your URI link>
 ```

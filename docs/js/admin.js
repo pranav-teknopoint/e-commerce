@@ -37,6 +37,7 @@ addButton.addEventListener("click", () => {
             document.getElementById("newproductprice").value = ``;
             document.getElementById("newproductcategory").value = ``;
             document.getElementById("newproductstockquantity").value = ``;
+            checkdarkmode();
           })
           .catch((error) => {
             console.error(error);
@@ -44,6 +45,7 @@ addButton.addEventListener("click", () => {
               refreshTokenlogin(refreshToken);
             }
           });
+        checkdarkmode();
       }
     } else {
       alert("Error uploading image. Please try again.");
@@ -79,6 +81,7 @@ authenticate("POST", accessToken, `${apiserver}/api/admin/productsadmin`)
     products.forEach((e) => {
       createProductscards(e);
     });
+    checkdarkmode();
   })
   .catch((error) => {
     console.error(error);
@@ -96,6 +99,7 @@ function getallproducts() {
       products.forEach((e) => {
         createProductscards(e);
       });
+      checkdarkmode();
     })
     .catch((error) => {
       console.error(error);
@@ -147,6 +151,7 @@ function deleteProducts(id, email) {
   )
     .then((res) => {
       getallproducts();
+      checkdarkmode();
     })
     .catch((error) => {
       console.error(error);
@@ -181,6 +186,7 @@ function editpassword(id) {
           setTimeout(() => {
             document.getElementById("change-message").innerHTML = ``;
           }, 3000);
+          checkdarkmode();
         })
         .catch((error) => {
           console.error(error);
@@ -195,13 +201,6 @@ function editpassword(id) {
 let userProfile = document.getElementById("user-profile");
 userProfile.addEventListener("click", () => {
   document.querySelector(".user-details").classList.toggle("display");
-});
-
-let logOut = document.getElementById("logout");
-logOut.addEventListener("click", () => {
-  removeLocalStorageItem(`accessToken`);
-  removeLocalStorageItem(`refreshToken`);
-  window.location.href = "./index.html";
 });
 
 document.getElementById("cart-back").addEventListener("click", () => {
@@ -225,6 +224,7 @@ function saveProducts(id) {
     authenticate("POST", accessToken, `${apiserver}/api/admin/edit/${id}`, data)
       .then((res) => {
         getallproducts();
+        checkdarkmode();
       })
       .catch((error) => {
         console.error(error);
@@ -370,6 +370,7 @@ function saveImage(id, oldimageurl) {
             id="edit${id}"
             onclick="editImage('${id}', '${email}')"
           />`;
+      checkdarkmode();
     } else {
       alert("Error uploading image. Please try again.");
     }

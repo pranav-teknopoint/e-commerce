@@ -16,6 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/products.css" />
   </head>
   <body>
     <div class="container">
@@ -29,6 +30,12 @@
             <div class="tabs">
               <div class="tab selected" id="login-tab"><p>Login</p></div>
               <div class="tab" id="register-tab"><p>Register</p></div>
+              <div class="themechanger" onclick="changetheme()">
+                <span class="material-symbols-rounded" id="mode-icon">
+                  light_mode
+                </span>
+                <div class="tooltip">Change Theme</div>
+              </div>
             </div>
             <div class="login display-flex">
               <input
@@ -87,6 +94,7 @@
       </div>
     </div>
     <script src="./js/common.js"></script>
+    <script src="./js/theme.js"></script>
     <script src="./js/main.js"></script>
   </body>
 </html>

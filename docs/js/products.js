@@ -48,6 +48,7 @@ authenticate("POST", accessToken, `${apiserver}/api/products/products`)
         document.getElementById("cartitems").innerHTML = "";
       }
     });
+    checkdarkmode();
   })
   .catch((error) => {
     console.error(error);
@@ -82,6 +83,7 @@ function filterdata(category) {
       products.forEach((e) => {
         createProductCards(e);
       });
+      checkdarkmode();
     })
     .catch((error) => {
       console.error(error);
@@ -103,6 +105,7 @@ function getallproducts() {
         creatcategorybutton(`${e.Category}`);
         createProductCards(e);
       });
+      checkdarkmode();
     })
     .catch((error) => {
       console.log(error);
@@ -217,6 +220,7 @@ function editpassword(id) {
           setTimeout(() => {
             document.getElementById("change-message").innerHTML = ``;
           }, 3000);
+          checkdarkmode();
         })
         .catch((error) => {
           console.error(error);
@@ -235,11 +239,4 @@ adminButton.addEventListener("click", () => {
 let userProfile = document.getElementById("user-profile");
 userProfile.addEventListener("click", () => {
   document.querySelector(".user-details").classList.toggle("display");
-});
-
-let logOut = document.getElementById("logout");
-logOut.addEventListener("click", () => {
-  removeLocalStorageItem(`accessToken`);
-  removeLocalStorageItem(`refreshToken`);
-  window.location.href = "./index.html";
 });

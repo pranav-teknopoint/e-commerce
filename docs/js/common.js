@@ -77,6 +77,17 @@ Array.prototype.sum = function () {
   return sum;
 };
 
+try {
+  let logOut = document.getElementById("logout");
+  logOut.addEventListener("click", () => {
+    removeLocalStorageItem(`accessToken`);
+    removeLocalStorageItem(`refreshToken`);
+    window.location.href = "./index.html";
+  });
+} catch {
+  console.log("Welcome!");
+}
+
 let prevScrollpos = window.pageYOffset;
 window.onscroll = function () {
   let currentScrollPos = window.pageYOffset;
@@ -87,3 +98,7 @@ window.onscroll = function () {
   }
   prevScrollpos = currentScrollPos;
 };
+
+document.querySelector(".login-again").addEventListener("click", () => {
+  window.location.href = "./index.html";
+});

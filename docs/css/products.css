@@ -4,8 +4,9 @@
   transition: all 0.3s ease;
 }
 
-#navbar{
+#navbar {
   background: #092635;
+  border-bottom: 1px solid grey;
   position: sticky;
   width: 100%;
   top: 0;
@@ -41,8 +42,10 @@
 
 .user-profile,
 .view-cart,
-.adminbutton {
+.adminbutton,
+.themechanger {
   padding: 8px 10px;
+  color: #f2f2f2;
   border-radius: 100px;
   background-color: #5c8374;
   cursor: pointer;
@@ -52,11 +55,11 @@
 
 .user-profile:hover,
 .view-cart:hover,
-.adminbutton:hover {
+.adminbutton:hover,
+.themechanger:hover {
   background: #1b4242;
   color: #f2f2f2;
   scale: 1.1;
-
 }
 
 .adminbutton {
@@ -224,6 +227,10 @@
   display: block;
 }
 
+.themechanger:hover .tooltip {
+  display: block;
+}
+
 .user-profile:hover .tooltip {
   display: block;
 }
@@ -245,14 +252,14 @@
 @media screen and (max-width: 767px) {
   .products-nav {
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(4, auto);
     padding: 5px;
     gap: 15px;
     transition: all 0.3s ease;
   }
 
   .user-name {
-    grid-column: span 3;
+    grid-column: span 4;
   }
 
   .user-details {
@@ -277,12 +284,13 @@
   }
 
   .categories {
-    grid-column: span 3;
+    grid-column: span 4;
     overflow-x: scroll;
   }
 
   .view-cart,
-  .adminbutton {
+  .adminbutton,
+  .themechanger {
     justify-self: center;
   }
 

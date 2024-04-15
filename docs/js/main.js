@@ -42,6 +42,9 @@ loginButton.addEventListener("click", () => {
           accessToken,
           `${apiserver}/api/products/products`
         ).then(function (res) {
+          // if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          //   setLocalStorageItem("currentmode", "dark");
+          // }
           window.location.href = "./products.html";
         });
       })
@@ -107,3 +110,5 @@ var refreshToken = getLocalStorageItem(`refreshToken`);
 if (refreshToken) {
   refreshTokenlogin(refreshToken);
 }
+
+checkdarkmode();

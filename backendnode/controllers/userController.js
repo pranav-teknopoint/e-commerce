@@ -30,10 +30,10 @@ exports.loginUser = async (req, res) => {
   let readUser = await Users.findOne({ email: email });
 
   if (!readUser) {
-  return res.status(401).json({ message: "Invalid credentials" });
-}
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
   const userValid = readUser.password === password;
-  
+
   if (!userValid) {
     return res.status(401).json({ message: "Invalid credentials" });
   }
